@@ -16,8 +16,9 @@ public class NumberWizard : MonoBehaviour
         Debug.Log("Pick a number but don't tell me what it is");
         Debug.Log("Highest number you can pick is " + high);
         Debug.Log("Lowest number you can pick is " + low);
-        Debug.Log("Tell me if you're number is higher or lower than 500");
+        Debug.Log("Tell me if you're number is higher or lower than " + guess);
         Debug.Log("Push up = higher, push down = lower, push enter = correct");
+        high++;
     }
 
     // Update is called once per frame
@@ -25,20 +26,22 @@ public class NumberWizard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow)) 
         {
-            Debug.Log("Up Arrow key was pressed.");
             low = guess;
-            Debug.Log("the minimum is now: " + low );
+            guess = CalculateNewGuess(low, high);
             Debug.Log("is your number " + guess + "?");
         } else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log("Down Arrow was pressed");
             high = guess;
-            Debug.Log("the maximum is now: " + high);
+            guess = CalculateNewGuess(low, high);
             Debug.Log("is your number " + guess + "?");
         } else if (Input.GetKeyDown(KeyCode.Return)) 
         {
-            Debug.Log("Return was pressed");
             Debug.Log("The computer guessed your number!!");
         }
+    }
+
+    int CalculateNewGuess(int low, int high) 
+    {
+        return (low + high) / 2;
     }
 }
